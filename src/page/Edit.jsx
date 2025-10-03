@@ -26,8 +26,8 @@ function progress(prg) {
 }
 
 export function Edit() {
-  const [priority, setPriority] = useState("Priority");
-  const [status, setStatus] = useState("Status");
+  // const [priority, setPriority] = useState("Priority");
+  // const [status, setStatus] = useState("Status");
   const { id } = useParams();
   const { tasks, setTasks } = useContext(TasksContext);
   const dateRef = useRef(null);
@@ -149,21 +149,7 @@ export function Edit() {
                 <h4 className="text-gray-500 text-[18px] font-semibold">
                   Due Date
                 </h4>
-                {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DesktopDatePicker
-                  label="Due Date"
-                  sx={{ width: "500px" }}
-                  value={date}
-                  onChange={(newValue) => {
-                    setTask({
-                      ...task,
-                      date: newValue.toLocaleDateString("en-CA"),
-                    });
-                    setDate(newValue);
-                    console.log(newValue.toLocaleDateString("en-CA"));
-                  }}
-                />
-              </LocalizationProvider> */}
+              
                 <div className="flex flex-col">
                   <button
                     className={
@@ -354,18 +340,7 @@ export function Edit() {
             >
               Cancel
             </Button>
-            {/* <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#14F3DC",
-              borderRadius: "20px",
-              padding: "8px 25px",
-              color: "white",
-            }}
-            onClick={handleEditSave}
-          >
-            Save
-          </Button> */}
+         
             <AlertDialog.Root>
               <AlertDialog.Trigger className="flex h-10 items-center justify-center rounded-4xl border border-gray-200 bg-[#14F3DC] px-3.5 text-base font-medium text-[#FFFFFF] select-none hover:bg-[#0D9488]  focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-blue-800 active:bg-gray-100">
                 Save Draft

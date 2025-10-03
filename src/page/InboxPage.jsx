@@ -14,7 +14,7 @@ import ToggleButtonGroup, {
   toggleButtonGroupClasses,
 } from "@mui/material/ToggleButtonGroup";
 
-const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
+const StyledToggleButtonGroup = styled(ToggleButtonGroup)(() => ({
   [`& .${toggleButtonGroupClasses.grouped}`]: {
     border: 0,
 
@@ -83,7 +83,7 @@ export default function Inbox() {
   }
 
   function handleDelete(id) {
-    // console.log(id,"from delete");
+    
     let currentTask = tasks.filter((task) => task.id !== id);
     setTasks(currentTask);
     localStorage.setItem("tasks", JSON.stringify(currentTask));
@@ -100,14 +100,14 @@ export default function Inbox() {
       currentDate = new Date();
       let updatedTask = [];
       if (toggle === "daily") {
-        console.log("daily");
+        
         tasks.map((task) => {
           if (task.date === currentDate.toLocaleDateString("en-CA")) {
             updatedTask.push(task);
           }
         });
       } else if (toggle == "weekly") {
-        console.log("weekly");
+      
         tasks.map((task) => {
           if (
             new Date(task.date) >= startOfWeek &&
@@ -122,11 +122,11 @@ export default function Inbox() {
     }
   }, [toggle, tasks]);
   useEffect(() => {
-    console.log(current, "current");
-    setTotal((prv) => 0);
+    
+    setTotal(() => 0);
     setOverdue((prv) => 0);
-    setCompleted((prv) => 0);
-    setPending((prv) => 0);
+    setCompleted(() => 0);
+    setPending(() => 0);
     if (current !== undefined) {
       setTotal(current.length);
       current.map((task) => {
@@ -134,10 +134,10 @@ export default function Inbox() {
           setOverdue((prv) => prv + 1);
         }
         if (task.progress.toLowerCase() === "completed") {
-          console.log("completed");
+          
           setCompleted((prv) => prv + 1);
         } else {
-          console.log("pending");
+        
           setPending((prv) => prv + 1);
         }
       });
@@ -160,7 +160,7 @@ export default function Inbox() {
           break;
         }
       }
-      // console.log(futTask);
+      
       setFutureTask(futTask);
     }
   }, [current, tasks]);
@@ -335,7 +335,7 @@ export default function Inbox() {
                   <Box sx={{ display: "flex", gap: 1 }}>
                     <Checkbox
                       checked={task.progress === "Completed" ? true : false}
-                      onClick={(e, check) => {
+                      onClick={() => {
                         handleChecked(task.id, task.progress);
                       }}
                     />
@@ -384,7 +384,7 @@ export default function Inbox() {
             )}
           </Box>
         ) : (
-          <CircularProgress enableTrackSlot size="3rem" />
+          <CircularProgress  size="3rem" />
         )}
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -405,6 +405,7 @@ export default function Inbox() {
                     borderRadius: "15px",
                     gap: 1,
                   }}
+                  key={task.id}
                 >
                   <Typography
                     variant="p"
@@ -433,7 +434,7 @@ export default function Inbox() {
             )}
           </Box>
         ) : (
-          <CircularProgress enableTrackSlot size="3rem" />
+          <CircularProgress size="3rem" />
         )}
       </Box>
     </Box>

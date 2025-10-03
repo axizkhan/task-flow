@@ -11,7 +11,7 @@ import { Popover } from "@base-ui-components/react/popover";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import IconButton from "@mui/material/IconButton";
-import { LinearProgress } from "@mui/material";
+
 
 function AllTasks() {
   const { tasks, setTasks } = useContext(TasksContext);
@@ -24,13 +24,7 @@ function AllTasks() {
   const[search,setSearch]=useState("");
   const renderCount = useRef(1);
   const dateRef = useRef(null);
-  const priorityArr = ["No priority", "Low", "Medium", "High"];
-  const statusArr = [
-    "Beginning",
-    "In Progress",
-    "Near Complition",
-    "Completed",
-  ];
+ 
 
   function onHandleDelte() {
     if (selectRow.length > 0) {
@@ -43,118 +37,14 @@ function AllTasks() {
         setIsPopoverOpen(false);
       }, 3000);
 
-      console.log("Select task");
+      
     }
   }
-  // useEffect(() => {
-  //   console.log("dominat", dominant);
-  //   if (renderCount.current !== 1) {
-  //     console.log("change the table");
-  //     let changeArr = [];
-  //     if (priority === "High") {
-  //       changeArr = priorityArr.reverse();
-  //     } else if (priority === "Low") {
-  //       changeArr = [...priorityArr.splice(1, 3), ...priorityArr.splice(0, 1)];
-  //       console.log(changeArr);
-  //     } else if (priority === "Medium") {
-  //       changeArr = [
-  //         ...priorityArr.splice(2, 2),
-  //         ...priorityArr.splice(1, 1),
-  //         ...priorityArr.splice(0, 1),
-  //       ];
-  //       console.log(changeArr);
-  //     } else {
-  //       changeArr = priorityArr;
-  //     }
-  //     let updatedTasks = [];
-  //     if (dominant == "priority" && status == "Status") {
-  //       for (let priority of changeArr) {
-  //         tasks.map((task) => {
-  //           if (task.priority === priority) {
-  //             updatedTasks.push(task);
-  //           }
-  //         });
-  //       }
-  //     } else if (dominant == "priority" && status !== "Status") {
-  //       tasks.map((task) => {
-  //         if (
-  //           task.priority == priority &&
-  //           task.progress.toLowerCase() == status.toLowerCase()
-  //         ) {
-  //           updatedTasks.push(task);
-  //         }
-  //       });
 
-  //       for (let priority2 of changeArr) {
-  //         tasks.map((task) => {
-  //           if (
-  //             task.priority === priority2 &&
-  //             task.priority !== priority &&
-  //             task.status !== status
-  //           ) {
-  //             updatedTasks.push(task);
-  //           }
-  //         });
-  //       }
-  //     }
-  //     setTasks(updatedTasks);
-  //   }
-  // }, [priority]);
-
-  // useEffect(() => {
-  //   console.log("dominat", dominant);
-  //   let changeArr = [];
-  //   if (renderCount.current !== 1) {
-  //     if (status === "Beginning") {
-  //       changeArr = statusArr;
-  //     } else if (status === "Completed") {
-  //       changeArr = statusArr.reverse();
-  //     } else if (status === "In Progress") {
-  //       changeArr = [...statusArr.splice(1, 3), ...statusArr.splice(0, 1)];
-  //     } else if (status === "Near Complition") {
-  //       changeArr = [
-  //         ...statusArr.splice(2, 2),
-  //         ...statusArr.splice(0, 2).reverse(),
-  //       ];
-  //     }
-  //     let updatedTask = [];
-  //     if (dominant == "status" && priority == "Priority") {
-  //       for (let status of changeArr) {
-  //         tasks.map((task) => {
-  //           if (task.progress.toLowerCase() === status.toLowerCase()) {
-  //             updatedTask.push(task);
-  //           }
-  //         });
-  //       }
-  //     } else if (dominant == "status" && priority !== "Priority") {
-  //       tasks.map((task) => {
-  //         if (
-  //           task.priority == priority &&
-  //           task.progress.toLowerCase() === status.toLowerCase()
-  //         ) {
-  //           updatedTask.push(task);
-  //         }
-  //       });
-  //       for (let status2 of changeArr) {
-  //         tasks.map((task) => {
-  //           if (
-  //             task.progress.toLowerCase() === status2.toLowerCase() &&
-  //             task.priority !== priority &&
-  //             task.progress.toLowerCase() !== status.toLowerCase()
-  //           ) {
-  //             updatedTask.push(task);
-  //           }
-  //         });
-  //       }
-  //     }
-  //     setTasks(updatedTask);
-  //   }
-  // }, [status]);
 
   useEffect(() => {
     if (renderCount.current !== 1) {
-      console.log("filter is change is table");
-      console.log("dominant", dominant);
+     
       const priorityOrderBase = ["No priority", "Low", "Medium", "High"];
       const statusOrderBase = [
         "Beginning",
@@ -198,11 +88,10 @@ function AllTasks() {
       let updatedTasks = [];
       let otherTask = [];
       if (dominant == "priority") {
-        // console.log("inside priority condition",priority);
-        // console.log("status inside priority condititon",status);
+     
 
         if (status == "Status") {
-          console.log("inside priority inside status");
+          
           for (let priority of priorityOrder) {
             tasks.map((task) => {
               if (task.priority === priority) {
@@ -256,8 +145,7 @@ function AllTasks() {
         }
       }
       setTasks([...updatedTasks, ...otherTask]);
-      console.log("updated task", updatedTasks);
-      console.log("other task", otherTask);
+    
     }
   }, [priority, status, dominant]);
 
@@ -280,7 +168,7 @@ function AllTasks() {
           }
         }
       });
-      console.log(newTasks);
+      
       setTasks(newTasks);
     }
   }, [date]);
@@ -289,79 +177,8 @@ function AllTasks() {
     setTasks(JSON.parse(localStorage.getItem("tasks")));
   }
 
-  // useEffect(() => {
-  //   if (renderCount.current !== 1) {
-  //     let updatedTasks = [...tasks]; // start from current tasks
+ 
 
-  //     // ----- Priority Sorting -----
-  //     let priorityOrder = [];
-  //     if (priority === "High") {
-  //       priorityOrder = ["High", "Medium", "Low", "No priority"];
-  //     } else if (priority === "Medium") {
-  //       priorityOrder = ["Medium", "High", "Low", "No priority"];
-  //     } else if (priority === "Low") {
-  //       priorityOrder = ["Low", "Medium", "High", "No priority"];
-  //     } else {
-  //       priorityOrder = priorityArr; // default order
-  //     }
-
-  //     let prioritySorted = [];
-  //     for (let p of priorityOrder) {
-  //       updatedTasks.forEach((task) => {
-  //         if (task.priority === p) {
-  //           prioritySorted.push(task);
-  //         }
-  //       });
-  //     }
-
-  //     // ----- Status Sorting -----
-  //     let statusOrder = [];
-  //     if (status === "Beginning") {
-  //       statusOrder = [
-  //         "Beginning",
-  //         "In Progress",
-  //         "Near Complition",
-  //         "Completed",
-  //       ];
-  //     } else if (status === "In Progress") {
-  //       statusOrder = [
-  //         "In Progress",
-  //         "Near Complition",
-  //         "Completed",
-  //         "Beginning",
-  //       ];
-  //     } else if (status === "Near Complition") {
-  //       statusOrder = [
-  //         "Near Complition",
-  //         "Completed",
-  //         "In Progress",
-  //         "Beginning",
-  //       ];
-  //     } else if (status === "Completed") {
-  //       statusOrder = [
-  //         "Completed",
-  //         "Near Complition",
-  //         "In Progress",
-  //         "Beginning",
-  //       ];
-  //     } else {
-  //       statusOrder = statusArr; // default
-  //     }
-
-  //     let finalSorted = [];
-  //     for (let s of statusOrder) {
-  //       prioritySorted.forEach((task) => {
-  //         if (task.progress.toLowerCase() === s.toLowerCase()) {
-  //           finalSorted.push(task);
-  //         }
-  //       });
-  //     }
-
-  //     setTasks(finalSorted);
-  //   } else {
-  //     renderCount.current += 1;
-  //   }
-  // }, [priority, status]);
 
   function handlePriorityChnage(e) {
     setPriority(e.target.innerText);
@@ -376,7 +193,7 @@ function AllTasks() {
   function handleSearch(){
     let currentTask=[];
     currentTask=tasks.filter((task)=>task.title===search)
-    console.log(currentTask);
+    
     setTasks(currentTask);
   }
 
@@ -398,7 +215,7 @@ function AllTasks() {
       </div>
       {tasks === undefined ? (
         <div>
-          <CircularProgress enableTrackSlot size="3rem" />
+          <CircularProgress  size="3rem" />
         </div>
       ) : (
         <div className="flex border-2 border-gray-300 rounded-2xl items-center px-4 py-3 bg-white ">
@@ -513,25 +330,7 @@ function AllTasks() {
                 </Menu.Positioner>
               </Menu.Portal>
             </Menu.Root>
-            {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DemoContainer components={["DatePicker"]}>
-              <DatePicker
-                label={"Select Date"}
-                views={["year", "month", "day"]}
-                slotProps={{
-                  textField: {
-                    sx: {
-                      color: "#bbdefb",
-
-                      fontSize: "10px",
-                      width: "50px",
-                      borderColor: "#gray",
-                    },
-                  },
-                }}
-              />
-            </DemoContainer>
-          </LocalizationProvider> */}
+            
             <div className="flex flex-col">
               <button
                 className={
@@ -540,7 +339,7 @@ function AllTasks() {
                 disabled={tasks.length > 0 ? false : true}
                 onClick={() => {
                   dateRef.current.showPicker();
-                  console.log("clicked");
+                
                 }}
               >
                 {date.toLocaleDateString("en-CA")}{" "}
@@ -558,18 +357,13 @@ function AllTasks() {
             </div>
           </div>
           <IconButton
-            // disabled={tasks.length > 0 ? false : true}
+            
             onClick={handleReset}
           >
             <ReplayIcon />
           </IconButton>
           <div className="flex gap-2 ml-[30vw]">
-            {/* <Button
-            className="bg-red-100 py-2 px-5 rounded-xl text-red-700"
-            onClick={onHandleDelte}
-          >
-            Delete
-          </Button> */}
+          
             <Popover.Root open={isPopoverOpen}>
               <Popover.Trigger
                 className={"bg-red-200 py-2 px-5 rounded-xl text-red-700"}

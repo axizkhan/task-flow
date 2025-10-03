@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
-import { useNavigate } from "react-router";
+import { useNavigate,useLocation } from "react-router";
 const menu = [
   { title: "Inbox", icon: "fa-inbox",link:"/" },
   { title: "All Task", icon: "fa-circle-notch",link:"/all-tasks" },
-  { title: "Upcoming", icon: "fa-calendar" ,link:"upcoming"},
-  { title: "Completed", icon: "fa-check-to-slot",link:"completed" },
-  {
-    title: "Tags",
-    icon: "fa-tags",
-  },
+  // { title: "Upcoming", icon: "fa-calendar" ,link:"/upcoming"},
+  // { title: "Completed", icon: "fa-check-to-slot",link:"completed" },
+  // {
+  //   title: "Tags",
+  //   icon: "fa-tags",
+  // },
 ];
 
 function SideBar() {
-  const [select, setSelect] = useState("Inbox");
+  const [select, setSelect] = useState("/");
+  const location=useLocation();
   const navigate=useNavigate();
+
+  useEffect(()=>{
+    
+    setSelect(location.pathname);
+  })
+  // console.log("SideBar rerender");
   return (
     <div className="flex flex-col justify-between gap-98 pt-4 px-6 pb-3 font-inter sticky top-0 h-[100vh] bg-white ">
       <div className="flex flex-col justify-between gap-6">
@@ -27,11 +34,11 @@ function SideBar() {
             <li
             key={idx}
               className={`flex gap-2 items-center  ${
-                select === menudis.title
+                select === menudis.link
                   ? "font-semibold py-1.5 bg-[#d1faf6]"
                   : "text-gray-400"
               } py-1 px-2  rounded-[10px] cursor-pointer`}
-              onClick={() => {setSelect(menudis.title)
+              onClick={() => {setSelect(menudis.link)
                 navigate(menudis.link);
               }}
             >
@@ -45,12 +52,7 @@ function SideBar() {
         </ul>
       </div>
 
-      {/* <button className="flex rounded-[15px] bg-[#19e6d1] py-2 px-15 gap-2">
-        <span>
-          <i className="fa-solid fa-plus"></i>
-        </span>
-        <span>New Task</span>
-      </button> */}
+    
        <Button
             variant="contained"
             sx={{
