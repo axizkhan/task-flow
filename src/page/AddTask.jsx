@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import MyBottons from "../components/smallComponents/MyBottons";
+// import MyBottons from "../components/smallComponents/MyBottons";
 import Button from "@mui/material/Button";
 
 import { Input } from "@mui/base";

@@ -82,14 +82,7 @@ function TaskTable({ tasks, setTasks }) {
           </TableHead>
           {tasks !== undefined ? (
             <TableBody className="bg-white">
-              {/* {tasks.map((task) => (
-                <TaskTableRow
-                  task={task}
-                  key={task.id}
-                  onClick={onHandleDelte}
-                  onNavigate={onNavigate}
-                />
-              ))} */}
+             
               {tasks.length > 0 ? (
                 tasks
                   .slice(rowsPerPage * page, rowsPerPage * (page + 1))
